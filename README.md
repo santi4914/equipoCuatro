@@ -31,6 +31,30 @@ Librerías: Navigation 2.10.2, Room 2.8.5, Lifecycle (ViewModel y LiveData) 2.11
 corrutinas 1.11.0, RecyclerView 1.4.0, CardView 1.0.0, Retrofit 3.0.0 con convertidor Gson
 (API https://dog.ceo/dog-api/), Lottie 6.7.1 y Biometric 1.1.0.
 
+## Arquitectura
+
+MVVM + Repository, como en la clase 8. Paquete base `com.equipocuatro.dogapp`:
+
+| Paquete | Contenido |
+|---|---|
+| `model` | `Cita` (entidad de Room; el `id` autogenerado es el turno) |
+| `data` | `CitaDao` y `CitaDB` (base de datos local SQLite con Room) |
+| `repository` | `CitaRepository`: acceso a los datos en `Dispatchers.IO` con corrutinas |
+| `viewmodel` | `CitaViewModel`: `LiveData` de la lista y del estado de carga |
+| `view` | `MainActivity` (contenedor de Navigation) y `fragment`, `adapter`, `viewholder` |
+| `utils` | `Constants` (nombre de la base de datos y claves de los `Bundle`) |
+
+Navegación (`res/navigation/nav_graph.xml`), destino inicial **Login**:
+
+```
+Login ──> Home ──> Nueva Cita ──> Home
+           └────> Detalle ──> Editar ──> Home
+                     └──────> Home
+```
+
+La cita seleccionada viaja entre fragments en un `Bundle` con la clave
+`Constants.CLAVE_CITA` (`Cita` es `Serializable`).
+
 ## Requisitos
 
 - **Android Studio Otter 3 Feature Drop (2025.2.3) o más reciente**: es la versión mínima que
