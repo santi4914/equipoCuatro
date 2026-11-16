@@ -36,5 +36,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPerro" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieHuella"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/descripcionHuella"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+            app:layout_constraintVertical_bias="0.43"
+            app:layout_constraintWidth_percent="0.55"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/huella_escaneo" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
