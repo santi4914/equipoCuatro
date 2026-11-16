@@ -6,4 +6,5 @@
     <string name="tituloDetalleCita">Detalle de la Cita</string>
     <string name="tituloEditarCita">Editar Cita</string>
     <string name="turno">#%1$d</string>
+    <string name="descripcionPerro">Cabeza de un perro</string>
 </resources>
