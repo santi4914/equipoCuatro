@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">DogApp</string>
-    <string name="tituloLogin">Login</string>
+    <string name="app_name">dogApp</string>
+    <string name="tituloLogin">DogApp</string>
     <string name="tituloHome">Administrador de Citas</string>
     <string name="tituloNuevaCita">Nueva Cita</string>
     <string name="tituloDetalleCita">Detalle de la Cita</string>
     <string name="tituloEditarCita">Editar Cita</string>
     <string name="turno">#%1$d</string>
+    <string name="descripcionPerro">Cabeza de un perro</string>
+    <string name="descripcionHuella">Huella digital, toque para ingresar</string>
+    <string name="tituloBiometria">Autenticación con Biometría</string>
+    <string name="subtituloBiometria">Ingrese su huella digital</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

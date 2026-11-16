@@ -6,19 +6,51 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gris_oscuro"
         tools:context=".view.fragment.LoginFragment">
+
+        <ImageView
+            android:id="@+id/ivPerro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/descripcionPerro"
+            android:src="@drawable/img_perro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6" />
 
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lilita_one"
             android:text="@string/tituloLogin"
-            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:textSize="64sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ivPerro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieHuella"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/descripcionHuella"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+            app:layout_constraintVertical_bias="0.31"
+            app:layout_constraintWidth_percent="0.55"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/huella_escaneo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
