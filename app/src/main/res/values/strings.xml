@@ -5,4 +5,5 @@
     <string name="tituloNuevaCita">Nueva Cita</string>
     <string name="tituloDetalleCita">Detalle de la Cita</string>
     <string name="tituloEditarCita">Editar Cita</string>
+    <string name="turno">#%1$d</string>
 </resources>
