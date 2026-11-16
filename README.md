@@ -131,6 +131,6 @@ en un archivo `.env` (ignorado por git) y se documenta en un `.env.example` sin 
 
 | Recurso | Dónde se usa | Autor y licencia |
 |---|---|---|
-| Cabeza de beagle (`res/drawable-*/img_perro.webp` y el ícono `res/mipmap-*`) | Login y ícono de la app | «[Beagle puppy's head](https://commons.wikimedia.org/wiki/File:Beagle_puppy%27s_head.png)», original de Juanelverdolaga, obra derivada de Saper (Wikimedia Commons), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Aquí se recortó, se escaló por densidad y se puso sobre fondo gris para el ícono; esas versiones quedan bajo la misma licencia. |
+| Perro del enunciado (`res/drawable-*/img_perro.webp` y el ícono `res/mipmap-*`) | Login y ícono de la app | «[View of adorable brown and white pet dog](https://www.freepik.com/free-psd/view-adorable-brown-white-pet-dog_38708533.htm)» (Freepik #38708533, la misma foto del pantallazo del enunciado), Designed by [Freepik](https://www.freepik.com). Recurso gratuito de Freepik, que exige esta atribución. Aquí se recortó con el encuadre del enunciado, se escaló por densidad y se puso sobre fondo gris para el ícono. |
 | Animación de huella (`res/raw/huella_escaneo.json`) | Login | «[Fingerprint biometric scan](https://lottiefiles.com/free-animation/fingerprint-biometric-scan-Ni4jlplq4h)», Ivan Kuznetsov (LottieFiles), Lottie Simple License (`licencias/Lottie_Simple_License.txt`). |
 | Fuente Lilita One (`res/font/lilita_one.ttf`) | Título «DogApp» | Juan Montoreano, SIL Open Font License 1.1 (`licencias/OFL_LilitaOne.txt`). |
