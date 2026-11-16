@@ -80,6 +80,27 @@ Desde la terminal (en la raíz del proyecto):
 
 El APK queda en `app/build/outputs/apk/debug/app-debug.apk`.
 
+### Probar el login con huella en el emulador
+
+La ventana de huella solo aparece si el dispositivo tiene una huella registrada (sin huella,
+Android muestra su propio mensaje, por ejemplo «No fingerprints enrolled»). En el emulador:
+
+1. Registrar una huella. Android exige un bloqueo de pantalla, así que primero se pone un PIN
+   de prueba y luego se abre el registro de huellas:
+   ```bash
+   adb shell locksettings set-pin 1234
+   adb shell am start -a android.settings.FINGERPRINT_ENROLL
+   ```
+   Escribir el PIN, aceptar y, cuando pida tocar el sensor, simular el dedo varias veces
+   hasta que diga «Fingerprint added»:
+   ```bash
+   adb emu finger touch 1
+   ```
+2. Abrir DogApp y tocar la huella animada. Con la ventana abierta:
+   - `adb emu finger touch 1` → huella registrada: entra al Home.
+   - `adb emu finger touch 2` → huella no registrada: el dispositivo muestra su error y no deja
+     entrar.
+
 ## Flujo de trabajo
 
 - `main`: versión estable. Solo recibe PR desde `develop`.
@@ -105,3 +126,11 @@ docs: describe how to run the app
 
 La API de dog.ceo es pública y no necesita llaves. Si más adelante se necesita alguna, va
 en un archivo `.env` (ignorado por git) y se documenta en un `.env.example` sin valores reales.
+
+## Créditos de recursos
+
+| Recurso | Dónde se usa | Autor y licencia |
+|---|---|---|
+| Cabeza de beagle (`res/drawable-*/img_perro.webp` y el ícono `res/mipmap-*`) | Login y ícono de la app | «[Beagle puppy's head](https://commons.wikimedia.org/wiki/File:Beagle_puppy%27s_head.png)», original de Juanelverdolaga, obra derivada de Saper (Wikimedia Commons), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Aquí se recortó, se escaló por densidad y se puso sobre fondo gris para el ícono; esas versiones quedan bajo la misma licencia. |
+| Animación de huella (`res/raw/huella_escaneo.json`) | Login | «[Fingerprint biometric scan](https://lottiefiles.com/free-animation/fingerprint-biometric-scan-Ni4jlplq4h)», Ivan Kuznetsov (LottieFiles), Lottie Simple License (`licencias/Lottie_Simple_License.txt`). |
+| Fuente Lilita One (`res/font/lilita_one.ttf`) | Título «DogApp» | Juan Montoreano, SIL Open Font License 1.1 (`licencias/OFL_LilitaOne.txt`). |
