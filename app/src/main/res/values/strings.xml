@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DogApp</string>
+    <string name="tituloLogin">Login</string>
+    <string name="tituloHome">Administrador de Citas</string>
+    <string name="tituloNuevaCita">Nueva Cita</string>
+    <string name="tituloDetalleCita">Detalle de la Cita</string>
+    <string name="tituloEditarCita">Editar Cita</string>
 </resources>
