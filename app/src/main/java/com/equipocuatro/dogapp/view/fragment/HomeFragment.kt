@@ -8,7 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import com.equipocuatro.dogapp.R
 import com.equipocuatro.dogapp.databinding.FragmentHomeBinding
+import com.equipocuatro.dogapp.utils.Constants
 import com.equipocuatro.dogapp.view.adapter.CitaAdapter
 import com.equipocuatro.dogapp.viewmodel.CitaViewModel
 
@@ -27,7 +30,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        controladores()
         observadorViewModel()
+    }
+
+    private fun controladores() {
+        binding.fabNuevaCita.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_nuevaCitaFragment)
+        }
     }
 
     private fun observadorViewModel() {
@@ -40,7 +50,10 @@ class HomeFragment : Fragment() {
         citaViewModel.getListCitas()
         citaViewModel.listCitas.observe(viewLifecycleOwner) { listCitas ->
             binding.recyclerview.layoutManager = LinearLayoutManager(context)
-            binding.recyclerview.adapter = CitaAdapter(listCitas)
+            binding.recyclerview.adapter = CitaAdapter(listCitas) { cita ->
+                val args = Bundle().apply { putSerializable(Constants.CLAVE_CITA, cita) }
+                findNavController().navigate(R.id.action_homeFragment_to_detalleCitaFragment, args)
+            }
         }
     }
 
