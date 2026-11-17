@@ -7,7 +7,10 @@ import com.equipocuatro.dogapp.databinding.ItemCitaBinding
 import com.equipocuatro.dogapp.model.Cita
 import com.equipocuatro.dogapp.view.viewholder.CitaViewHolder
 
-class CitaAdapter(private val listCitas: MutableList<Cita>) :
+class CitaAdapter(
+    private val listCitas: MutableList<Cita>,
+    private val onClick: (Cita) -> Unit
+) :
     RecyclerView.Adapter<CitaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CitaViewHolder {
@@ -21,6 +24,6 @@ class CitaAdapter(private val listCitas: MutableList<Cita>) :
 
     override fun onBindViewHolder(holder: CitaViewHolder, position: Int) {
         val cita = listCitas[position]
-        holder.setItemCita(cita)
+        holder.setItemCita(cita, onClick)
     }
 }
