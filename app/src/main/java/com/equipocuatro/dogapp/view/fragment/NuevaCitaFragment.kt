@@ -106,6 +106,7 @@ class NuevaCitaFragment : Fragment() {
     private fun observerProgress() {
         citaViewModel.progressState.observe(viewLifecycleOwner) { status ->
             binding.progress.isVisible = status
+            binding.svFormulario.isVisible = !status
         }
     }
 
