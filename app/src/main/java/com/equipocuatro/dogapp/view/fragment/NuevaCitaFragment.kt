@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -53,24 +54,28 @@ class NuevaCitaFragment : Fragment() {
         }
     }
 
-    // Guarda la cita en Room y, cuando termina, vuelve al Home.
+    // Pide a la API una imagen de la raza, guarda la cita en Room
+    // y, cuando termina, vuelve al Home.
     private fun saveCita() {
         val nombreMascota = binding.etNombreMascota.text.toString()
         val raza = binding.atRaza.text.toString()
         val nombrePropietario = binding.etNombrePropietario.text.toString()
         val telefono = binding.etTelefono.text.toString()
         val sintoma = binding.spSintomas.selectedItem.toString()
-        val cita = Cita(
-            nombreMascota = nombreMascota,
-            raza = raza,
-            nombrePropietario = nombrePropietario,
-            telefono = telefono,
-            sintoma = sintoma,
-            urlImagen = ""
-        )
-        citaViewModel.saveCita(cita) { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+
+        citaViewModel.getImagenRaza(raza.lowercase()) { urlImagen ->
+            val cita = Cita(
+                nombreMascota = nombreMascota,
+                raza = raza,
+                nombrePropietario = nombrePropietario,
+                telefono = telefono,
+                sintoma = sintoma,
+                urlImagen = urlImagen
+            )
+            citaViewModel.saveCita(cita) { message ->
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -101,6 +106,13 @@ class NuevaCitaFragment : Fragment() {
 
     private fun observadorViewModel() {
         observerListRazas()
+        observerProgress()
+    }
+
+    private fun observerProgress() {
+        citaViewModel.progressState.observe(viewLifecycleOwner) { status ->
+            binding.progress.isVisible = status
+        }
     }
 
     // Las razas llegan de la API y alimentan el AutoCompleteTextView.
