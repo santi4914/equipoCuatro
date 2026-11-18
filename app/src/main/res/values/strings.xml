@@ -16,4 +16,15 @@
     <string name="hintRaza">Raza</string>
     <string name="hintNombrePropietario">Nombre del Propietario</string>
     <string name="hintTelefono">Teléfono</string>
+
+    <!-- La primera opción es la que se muestra por defecto. -->
+    <string-array name="sintomas">
+        <item>Síntomas</item>
+        <item>Solo duerme</item>
+        <item>No come</item>
+        <item>Fractura extremidad</item>
+        <item>Tiene pulgas</item>
+        <item>Tiene garrapatas</item>
+        <item>Bota demasiado pelo</item>
+    </string-array>
 </resources>
