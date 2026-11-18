@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.equipocuatro.dogapp.databinding.FragmentNuevaCitaBinding
+import com.equipocuatro.dogapp.model.Cita
 import com.equipocuatro.dogapp.viewmodel.CitaViewModel
 
 class NuevaCitaFragment : Fragment() {
@@ -37,6 +39,30 @@ class NuevaCitaFragment : Fragment() {
         validarDatos()
         // La flecha rosada regresa al Home.
         binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.btnGuardarCita.setOnClickListener {
+            saveCita()
+        }
+    }
+
+    // Guarda la cita en Room y, cuando termina, vuelve al Home.
+    private fun saveCita() {
+        val nombreMascota = binding.etNombreMascota.text.toString()
+        val raza = binding.atRaza.text.toString()
+        val nombrePropietario = binding.etNombrePropietario.text.toString()
+        val telefono = binding.etTelefono.text.toString()
+        val sintoma = binding.spSintomas.selectedItem.toString()
+        val cita = Cita(
+            nombreMascota = nombreMascota,
+            raza = raza,
+            nombrePropietario = nombrePropietario,
+            telefono = telefono,
+            sintoma = sintoma,
+            urlImagen = ""
+        )
+        citaViewModel.saveCita(cita) { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }
     }
