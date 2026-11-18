@@ -4,11 +4,14 @@ import android.content.Context
 import com.equipocuatro.dogapp.data.CitaDB
 import com.equipocuatro.dogapp.data.CitaDao
 import com.equipocuatro.dogapp.model.Cita
+import com.equipocuatro.dogapp.webservice.ApiService
+import com.equipocuatro.dogapp.webservice.ApiUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CitaRepository(val context: Context) {
     private val citaDao: CitaDao = CitaDB.getDatabase(context).citaDao()
+    private val apiService: ApiService = ApiUtils.getApiService()
 
     suspend fun saveCita(cita: Cita, messageResponse: (String) -> Unit) {
         try {
@@ -36,6 +39,32 @@ class CitaRepository(val context: Context) {
     suspend fun updateCita(cita: Cita) {
         withContext(Dispatchers.IO) {
             citaDao.updateCita(cita)
+        }
+    }
+
+    // Lista de razas desde la API: las llaves de "message" son los nombres.
+    suspend fun getRazas(): MutableList<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getRazas()
+                response.message.keys.toMutableList()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                mutableListOf()
+            }
+        }
+    }
+
+    // URL de una imagen aleatoria de la raza escogida.
+    suspend fun getImagenRaza(raza: String): String {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getImagenRaza(raza)
+                response.message
+            } catch (e: Exception) {
+                e.printStackTrace()
+                ""
+            }
         }
     }
 }
