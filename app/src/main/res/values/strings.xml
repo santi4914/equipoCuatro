@@ -13,6 +13,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="volver">Volver</string>
     <string name="hintNombreMascota">Nombre de la Mascota</string>
+    <string name="hintRaza">Raza</string>
     <string name="hintNombrePropietario">Nombre del Propietario</string>
     <string name="hintTelefono">Teléfono</string>
 </resources>
