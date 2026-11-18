@@ -14,7 +14,6 @@ class CitaViewHolder(binding: ItemCitaBinding) : RecyclerView.ViewHolder(binding
         bindingItem.tvSintoma.text = cita.sintoma
         bindingItem.tvTurno.text = bindingItem.root.context.getString(R.string.turno, cita.id)
         bindingItem.root.setOnClickListener { onClick(cita) }
-        // La imagen circular de la mascota se carga desde la URL con Glide.
         bindingItem.ivMascota.clipToOutline = true
         Glide.with(bindingItem.root.context).load(cita.urlImagen).into(bindingItem.ivMascota)
     }

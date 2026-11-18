@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Rosado opaco cuando el botón está inactivo y rosado sólido cuando se habilita. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/rosado_inactivo" android:state_enabled="false" />
     <item android:color="@color/rosado" />

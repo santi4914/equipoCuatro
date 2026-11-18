@@ -42,7 +42,6 @@ class CitaRepository(val context: Context) {
         }
     }
 
-    // Lista de razas desde la API: las llaves de "message" son los nombres.
     suspend fun getRazas(): MutableList<String> {
         return withContext(Dispatchers.IO) {
             try {
@@ -55,7 +54,6 @@ class CitaRepository(val context: Context) {
         }
     }
 
-    // URL de una imagen aleatoria de la raza escogida.
     suspend fun getImagenRaza(raza: String): String {
         return withContext(Dispatchers.IO) {
             try {

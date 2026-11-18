@@ -19,7 +19,6 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
     private val _progressState = MutableLiveData(false)
     val progressState: LiveData<Boolean> = _progressState
 
-    // Razas de perros que vienen de la API.
     private val _listRazas = MutableLiveData<MutableList<String>>()
     val listRazas: LiveData<MutableList<String>> = _listRazas
 

@@ -39,12 +39,10 @@ class NuevaCitaFragment : Fragment() {
 
     private fun controladores() {
         validarDatos()
-        // La flecha rosada regresa al Home.
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
         binding.btnGuardarCita.setOnClickListener {
-            // La posición 0 es "Síntomas", es decir, no se ha escogido ninguno.
             if (binding.spSintomas.selectedItemPosition == 0) {
                 Toast.makeText(context, getString(R.string.seleccionaSintoma), Toast.LENGTH_SHORT)
                     .show()
@@ -54,8 +52,6 @@ class NuevaCitaFragment : Fragment() {
         }
     }
 
-    // Pide a la API una imagen de la raza, guarda la cita en Room
-    // y, cuando termina, vuelve al Home.
     private fun saveCita() {
         val nombreMascota = binding.etNombreMascota.text.toString()
         val raza = binding.atRaza.text.toString()
@@ -79,8 +75,6 @@ class NuevaCitaFragment : Fragment() {
         }
     }
 
-    // El botón solo se habilita cuando los cuatro campos están llenos;
-    // habilitado, el texto queda en blanco bold.
     private fun validarDatos() {
         val listEditText = listOf<EditText>(
             binding.etNombreMascota,
@@ -115,7 +109,6 @@ class NuevaCitaFragment : Fragment() {
         }
     }
 
-    // Las razas llegan de la API y alimentan el AutoCompleteTextView.
     private fun observerListRazas() {
         citaViewModel.getRazas()
         citaViewModel.listRazas.observe(viewLifecycleOwner) { listRazas ->
