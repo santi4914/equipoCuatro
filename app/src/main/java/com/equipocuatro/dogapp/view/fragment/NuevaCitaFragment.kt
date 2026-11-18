@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.equipocuatro.dogapp.R
 import com.equipocuatro.dogapp.databinding.FragmentNuevaCitaBinding
 import com.equipocuatro.dogapp.model.Cita
 import com.equipocuatro.dogapp.viewmodel.CitaViewModel
@@ -42,7 +43,13 @@ class NuevaCitaFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.btnGuardarCita.setOnClickListener {
-            saveCita()
+            // La posición 0 es "Síntomas", es decir, no se ha escogido ninguno.
+            if (binding.spSintomas.selectedItemPosition == 0) {
+                Toast.makeText(context, getString(R.string.seleccionaSintoma), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                saveCita()
+            }
         }
     }
 
