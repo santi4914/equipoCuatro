@@ -128,6 +128,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tilTelefono" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardarCita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:backgroundTint="@color/boton_rosado"
+                    android:enabled="false"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:text="@string/guardarCita"
+                    android:textColor="@color/texto_boton"
+                    app:cornerRadius="24dp"
+                    app:icon="@drawable/ic_guardar"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    app:iconTint="@color/texto_boton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spSintomas" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

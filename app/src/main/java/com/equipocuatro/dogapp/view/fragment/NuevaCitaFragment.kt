@@ -1,10 +1,13 @@
 package com.equipocuatro.dogapp.view.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,9 +34,35 @@ class NuevaCitaFragment : Fragment() {
     }
 
     private fun controladores() {
+        validarDatos()
         // La flecha rosada regresa al Home.
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    // El botón solo se habilita cuando los cuatro campos están llenos;
+    // habilitado, el texto queda en blanco bold.
+    private fun validarDatos() {
+        val listEditText = listOf<EditText>(
+            binding.etNombreMascota,
+            binding.atRaza,
+            binding.etNombrePropietario,
+            binding.etTelefono
+        )
+
+        for (editText in listEditText) {
+            editText.addTextChangedListener {
+                val isListFull = listEditText.all {
+                    it.text.isNotEmpty()
+                }
+                binding.btnGuardarCita.isEnabled = isListFull
+                if (isListFull) {
+                    binding.btnGuardarCita.setTypeface(null, Typeface.BOLD)
+                } else {
+                    binding.btnGuardarCita.setTypeface(null, Typeface.NORMAL)
+                }
+            }
         }
     }
 

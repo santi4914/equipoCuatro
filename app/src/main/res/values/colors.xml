@@ -5,4 +5,6 @@
     <color name="gris_oscuro">#FF212930</color>
     <color name="rosado">#F05861</color>
     <color name="fondo_home">#FFFFF9FE</color>
+    <color name="rosado_inactivo">#99F05861</color>
+    <color name="blanco_inactivo">#B3FFFFFF</color>
 </resources>
