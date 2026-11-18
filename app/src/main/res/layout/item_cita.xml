@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:textColor="@color/rosado"
+                    android:textColor="@color/gris_oscuro"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/tvTurno"

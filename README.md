@@ -29,20 +29,23 @@ Dispositivos Moviles (Univalle). Equipo 4.
 
 Librerías: Navigation 2.10.2, Room 2.8.5, Lifecycle (ViewModel y LiveData) 2.11.0,
 corrutinas 1.11.0, RecyclerView 1.4.0, CardView 1.0.0, Retrofit 3.0.0 con convertidor Gson
-(API https://dog.ceo/dog-api/), Lottie 6.7.1 y Biometric 1.1.0.
+(API https://dog.ceo/dog-api/), Glide 4.16.0 (imágenes desde una URL), Lottie 6.7.1 y
+Biometric 1.1.0.
 
 ## Arquitectura
 
-MVVM + Repository, como en la clase 8. Paquete base `com.equipocuatro.dogapp`:
+MVVM + Repository, como en las clases 8 y 9 (Room y consumo de API con Retrofit).
+Paquete base `com.equipocuatro.dogapp`:
 
 | Paquete | Contenido |
 |---|---|
-| `model` | `Cita` (entidad de Room; el `id` autogenerado es el turno) |
+| `model` | `Cita` (entidad de Room; el `id` autogenerado es el turno) y las respuestas de la API (`RazasModelResponse`, `ImagenRazaModelResponse`) |
 | `data` | `CitaDao` y `CitaDB` (base de datos local SQLite con Room) |
-| `repository` | `CitaRepository`: acceso a los datos en `Dispatchers.IO` con corrutinas |
-| `viewmodel` | `CitaViewModel`: `LiveData` de la lista y del estado de carga |
+| `webservice` | `RetrofitClient`, `ApiService` y `ApiUtils`: consumo de la API dog.ceo con Retrofit |
+| `repository` | `CitaRepository`: acceso a Room y a la API en `Dispatchers.IO` con corrutinas |
+| `viewmodel` | `CitaViewModel`: `LiveData` de las citas, de las razas y del estado de carga |
 | `view` | `MainActivity` (contenedor de Navigation) y `fragment`, `adapter`, `viewholder` |
-| `utils` | `Constants` (nombre de la base de datos y claves de los `Bundle`) |
+| `utils` | `Constants` (base de datos, claves de los `Bundle` y URL de la API) |
 
 Navegación (`res/navigation/nav_graph.xml`), destino inicial **Login**:
 

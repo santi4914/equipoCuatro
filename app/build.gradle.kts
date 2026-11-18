@@ -76,6 +76,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
+    // Glide (imagenes desde una URL)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     // Lottie (animacion de la huella)
     implementation("com.airbnb.android:lottie:6.7.1")
 

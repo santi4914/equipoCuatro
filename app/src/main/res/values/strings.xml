@@ -11,4 +11,22 @@
     <string name="tituloBiometria">Autenticación con Biometría</string>
     <string name="subtituloBiometria">Ingrese su huella digital</string>
     <string name="cancelar">Cancelar</string>
+    <string name="informacionCita">Turno #%1$d\nMascota: %2$s\nRaza: %3$s\nPropietario: %4$s\nTeléfono: %5$s\nSíntoma: %6$s</string>
+    <string name="volver">Volver</string>
+    <string name="hintNombreMascota">Nombre de la Mascota</string>
+    <string name="hintRaza">Raza</string>
+    <string name="hintNombrePropietario">Nombre del Propietario</string>
+    <string name="hintTelefono">Teléfono</string>
+    <string name="guardarCita">Guardar Cita</string>
+    <string name="seleccionaSintoma">Selecciona un síntoma</string>
+
+    <string-array name="sintomas">
+        <item>Síntomas</item>
+        <item>Solo duerme</item>
+        <item>No come</item>
+        <item>Fractura extremidad</item>
+        <item>Tiene pulgas</item>
+        <item>Tiene garrapatas</item>
+        <item>Bota demasiado pelo</item>
+    </string-array>
 </resources>

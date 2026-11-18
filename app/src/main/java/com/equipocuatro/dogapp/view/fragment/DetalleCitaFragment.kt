@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.equipocuatro.dogapp.R
 import com.equipocuatro.dogapp.databinding.FragmentDetalleCitaBinding
 import com.equipocuatro.dogapp.model.Cita
-import android.graphics.BitmapFactory
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.net.URL
+import com.equipocuatro.dogapp.utils.Constants
 
 class DetalleCitaFragment : Fragment() {
     private lateinit var binding: FragmentDetalleCitaBinding
@@ -27,16 +24,18 @@ class DetalleCitaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val cita = requireArguments().getSerializable("cita") as Cita
-        binding.tvInformacion.text = "Turno #${cita.id}\nMascota: ${cita.nombreMascota}\nRaza: ${cita.raza}\nPropietario: ${cita.nombrePropietario}\nTeléfono: ${cita.telefono}\nSíntoma: ${cita.sintoma}"
+        super.onViewCreated(view, savedInstanceState)
+        val cita = requireArguments().getSerializable(Constants.CLAVE_CITA) as Cita
+        binding.tvInformacion.text = getString(
+            R.string.informacionCita,
+            cita.id,
+            cita.nombreMascota,
+            cita.raza,
+            cita.nombrePropietario,
+            cita.telefono,
+            cita.sintoma
+        )
         binding.ivMascota.clipToOutline = true
-        if (cita.urlImagen.startsWith("http", ignoreCase = true)) {
-            viewLifecycleOwner.lifecycleScope.launch {
-                val bitmap = withContext(Dispatchers.IO) {
-                    runCatching { URL(cita.urlImagen).openStream().use(BitmapFactory::decodeStream) }.getOrNull()
-                }
-                if (bitmap != null) binding.ivMascota.setImageBitmap(bitmap)
-            }
-        }
+        Glide.with(binding.root.context).load(cita.urlImagen).into(binding.ivMascota)
     }
 }

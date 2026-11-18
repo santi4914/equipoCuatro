@@ -19,6 +19,9 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
     private val _progressState = MutableLiveData(false)
     val progressState: LiveData<Boolean> = _progressState
 
+    private val _listRazas = MutableLiveData<MutableList<String>>()
+    val listRazas: LiveData<MutableList<String>> = _listRazas
+
     fun saveCita(cita: Cita, message: (String) -> Unit) {
         viewModelScope.launch {
             _progressState.value = true
@@ -50,6 +53,30 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
             _progressState.value = true
             try {
                 citaRepository.deleteCita(cita)
+                _progressState.value = false
+            } catch (e: Exception) {
+                _progressState.value = false
+            }
+        }
+    }
+
+    fun getRazas() {
+        viewModelScope.launch {
+            _progressState.value = true
+            try {
+                _listRazas.value = citaRepository.getRazas()
+                _progressState.value = false
+            } catch (e: Exception) {
+                _progressState.value = false
+            }
+        }
+    }
+
+    fun getImagenRaza(raza: String, urlImagen: (String) -> Unit) {
+        viewModelScope.launch {
+            _progressState.value = true
+            try {
+                urlImagen(citaRepository.getImagenRaza(raza))
                 _progressState.value = false
             } catch (e: Exception) {
                 _progressState.value = false
