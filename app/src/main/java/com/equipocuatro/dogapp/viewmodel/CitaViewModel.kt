@@ -48,14 +48,16 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteCita(cita: Cita) {
+    fun deleteCita(cita: Cita, onComplete: (Boolean) -> Unit = {}) {
         viewModelScope.launch {
             _progressState.value = true
             try {
                 citaRepository.deleteCita(cita)
                 _progressState.value = false
+                onComplete(true)
             } catch (e: Exception) {
                 _progressState.value = false
+                onComplete(false)
             }
         }
     }
