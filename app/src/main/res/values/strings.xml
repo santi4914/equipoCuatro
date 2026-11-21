@@ -18,6 +18,9 @@
     <string name="hintNombrePropietario">Nombre del Propietario</string>
     <string name="hintTelefono">Teléfono</string>
     <string name="guardarCita">Guardar Cita</string>
+    <string name="propietarioDetalle">Propietario: %1$s</string>
+    <string name="telefonoDetalle">Teléfono: %1$s</string>
+    <string name="eliminarCita">Eliminar cita</string>
     <string name="seleccionaSintoma">Selecciona un síntoma</string>
 
     <string-array name="sintomas">
