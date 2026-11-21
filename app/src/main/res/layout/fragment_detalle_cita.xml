@@ -49,15 +49,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImagen"
-            android:layout_width="0dp"
-            android:layout_height="190dp"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
             android:layout_marginTop="38dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="0dp"
             app:cardElevation="10dp"
-            app:layout_constraintWidth_percent="0.58"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarDetalle">
+            app:layout_constraintTop_toBottomOf="@id/toolbarDetalle"
+            app:layout_constraintWidth_percent="0.58">
 
             <ImageView
                 android:id="@+id/ivMascota"
@@ -77,7 +77,7 @@
             android:layout_marginEnd="24dp"
             android:translationY="-76dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="0dp"
             app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
