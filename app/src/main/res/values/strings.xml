@@ -3,7 +3,6 @@
     <string name="tituloLogin">DogApp</string>
     <string name="tituloHome">Administrador de Citas</string>
     <string name="tituloNuevaCita">Nueva Cita</string>
-    <string name="tituloDetalleCita">Detalle de la Cita</string>
     <string name="tituloEditarCita">Editar Cita</string>
     <string name="turno">#%1$d</string>
     <string name="descripcionPerro">Cabeza de un perro</string>
@@ -11,7 +10,6 @@
     <string name="tituloBiometria">Autenticación con Biometría</string>
     <string name="subtituloBiometria">Ingrese su huella digital</string>
     <string name="cancelar">Cancelar</string>
-    <string name="informacionCita">Turno #%1$d\nMascota: %2$s\nRaza: %3$s\nPropietario: %4$s\nTeléfono: %5$s\nSíntoma: %6$s</string>
     <string name="volver">Volver</string>
     <string name="hintNombreMascota">Nombre de la Mascota</string>
     <string name="hintRaza">Raza</string>
