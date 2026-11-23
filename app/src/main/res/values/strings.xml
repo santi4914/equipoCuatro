@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">dogApp</string>
+    <string name="tituloLogin">DogApp</string>
+    <string name="tituloHome">Administrador de Citas</string>
+    <string name="tituloNuevaCita">Nueva Cita</string>
+    <string name="tituloEditarCita">Editar Cita</string>
+    <string name="turno">#%1$d</string>
+    <string name="descripcionPerro">Cabeza de un perro</string>
+    <string name="descripcionHuella">Huella digital, toque para ingresar</string>
+    <string name="tituloBiometria">Autenticación con Biometría</string>
+    <string name="subtituloBiometria">Ingrese su huella digital</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="volver">Volver</string>
+    <string name="hintNombreMascota">Nombre de la Mascota</string>
+    <string name="hintRaza">Raza</string>
+    <string name="hintNombrePropietario">Nombre del Propietario</string>
+    <string name="hintTelefono">Teléfono</string>
+    <string name="guardarCita">Guardar Cita</string>
+    <string name="propietarioDetalle">Propietario: %1$s</string>
+    <string name="telefonoDetalle">Teléfono: %1$s</string>
+    <string name="eliminarCita">Eliminar cita</string>
+    <string name="seleccionaSintoma">Selecciona un síntoma</string>
+
+    <string-array name="sintomas">
+        <item>Síntomas</item>
+        <item>Solo duerme</item>
+        <item>No come</item>
+        <item>Fractura extremidad</item>
+        <item>Tiene pulgas</item>
+        <item>Tiene garrapatas</item>
+        <item>Bota demasiado pelo</item>
+    </string-array>
+
+    <string name="citaGuardada">Cita guardada correctamente</string>
+    <string name="errorGuardarCita">Error al guardar la cita: %1$s</string>
+    <string name="errorImagenRaza">No se pudo obtener la imagen de la raza</string>
+    <string name="citaActualizada">Cita actualizada correctamente</string>
+    <string name="errorActualizacion">Error al actualizar la cita</string>
+
+</resources>
