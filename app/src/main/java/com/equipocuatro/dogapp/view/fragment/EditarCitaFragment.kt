@@ -154,7 +154,7 @@ class EditarCitaFragment : Fragment() {
         ) {
             Toast.makeText(
                 requireContext(),
-                "Completa todos los campos",
+                getString(R.string.msg_campos_obligatorios),
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -185,7 +185,7 @@ class EditarCitaFragment : Fragment() {
 
                     Toast.makeText(
                         requireContext(),
-                        "No se pudo obtener la imagen de la raza",
+                        getString(R.string.msg_error_imagen_raza),
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -212,7 +212,7 @@ class EditarCitaFragment : Fragment() {
             if (exito) {
                 Toast.makeText(
                     requireContext(),
-                    "Cita actualizada correctamente",
+                    getString(R.string.msg_cita_actualizada),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -222,7 +222,7 @@ class EditarCitaFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Error al actualizar la cita",
+                    getString(R.string.msg_error_actualizacion),
                     Toast.LENGTH_LONG
                 ).show()
             }
