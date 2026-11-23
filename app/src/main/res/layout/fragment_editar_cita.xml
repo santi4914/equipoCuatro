@@ -153,7 +153,7 @@
                     android:textColor="@color/texto_boton"
                     android:textStyle="bold"
                     app:cornerRadius="24dp"
-                    app:icon="@android:drawable/ic_menu_edit"
+                    app:icon="@drawable/ic_editar"
                     app:iconGravity="textStart"
                     app:iconPadding="8dp"
                     app:iconTint="@color/texto_boton"
