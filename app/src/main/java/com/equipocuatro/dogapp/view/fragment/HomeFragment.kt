@@ -45,14 +45,14 @@ class HomeFragment : Fragment() {
         observerProgress()
     }
 
-    // La lista sale de la base de datos local (Room) por medio del ViewModel.
     private fun observerListCitas() {
         citaViewModel.getListCitas()
         citaViewModel.listCitas.observe(viewLifecycleOwner) { listCitas ->
             binding.recyclerview.layoutManager = LinearLayoutManager(context)
             binding.recyclerview.adapter = CitaAdapter(listCitas) { cita ->
-                val args = Bundle().apply { putSerializable(Constants.CLAVE_CITA, cita) }
-                findNavController().navigate(R.id.action_homeFragment_to_detalleCitaFragment, args)
+                val bundle = Bundle()
+                bundle.putSerializable(Constants.CLAVE_CITA, cita)
+                findNavController().navigate(R.id.action_homeFragment_to_detalleCitaFragment, bundle)
             }
         }
     }

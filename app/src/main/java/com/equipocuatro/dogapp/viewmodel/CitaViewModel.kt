@@ -48,7 +48,7 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteCita(cita: Cita, onComplete: (Boolean) -> Unit = {}) {
+    fun deleteCita(cita: Cita, onComplete: (Boolean) -> Unit) {
         viewModelScope.launch {
             _progressState.value = true
             try {
@@ -78,29 +78,26 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _progressState.value = true
             try {
-                urlImagen(citaRepository.getImagenRaza(raza))
+                val url = citaRepository.getImagenRaza(raza)
                 _progressState.value = false
+                urlImagen(url)
             } catch (e: Exception) {
                 _progressState.value = false
             }
         }
     }
 
-
-    fun updateCita(cita: Cita, onComplete: (Boolean) -> Unit = {}) {
+    fun updateCita(cita: Cita, onComplete: (Boolean) -> Unit) {
         viewModelScope.launch {
             _progressState.value = true
-
-            val actualizado = try {
+            try {
                 citaRepository.updateCita(cita)
-                true
-            } catch (e: Exception) {
-                false
-            } finally {
                 _progressState.value = false
+                onComplete(true)
+            } catch (e: Exception) {
+                _progressState.value = false
+                onComplete(false)
             }
-
-            onComplete(actualizado)
         }
     }
 }

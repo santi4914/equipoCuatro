@@ -30,12 +30,12 @@ class DetalleCitaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cita = requireArguments().getSerializable(Constants.CLAVE_CITA) as Cita
-        mostrarCita()
+        dataCita()
         controladores()
     }
 
-    private fun mostrarCita() {
+    private fun dataCita() {
+        cita = arguments?.getSerializable(Constants.CLAVE_CITA) as Cita
         binding.tvTitulo.text = cita.nombreMascota
         binding.tvTurno.text = getString(R.string.turno, cita.id)
         binding.tvRaza.text = cita.raza
@@ -46,29 +46,24 @@ class DetalleCitaFragment : Fragment() {
     }
 
     private fun controladores() {
-        binding.btnVolver.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_detalleCitaFragment_to_homeFragment)
         }
         binding.fbEliminar.setOnClickListener {
-            binding.fbEliminar.isEnabled = false
-            binding.fbEditar.isEnabled = false
-            binding.btnVolver.isEnabled = false
-            citaViewModel.deleteCita(cita) { deleted ->
-                if (deleted && isAdded) {
-                    findNavController().navigate(R.id.action_detalleCitaFragment_to_homeFragment)
-                } else if (isAdded) {
-                    binding.fbEliminar.isEnabled = true
-                    binding.fbEditar.isEnabled = true
-                    binding.btnVolver.isEnabled = true
-                }
-            }
+            deleteCita()
         }
         binding.fbEditar.setOnClickListener {
-            val args = Bundle().apply { putSerializable(Constants.CLAVE_CITA, cita) }
-            findNavController().navigate(
-                R.id.action_detalleCitaFragment_to_editarCitaFragment,
-                args
-            )
+            val bundle = Bundle()
+            bundle.putSerializable(Constants.CLAVE_CITA, cita)
+            findNavController().navigate(R.id.action_detalleCitaFragment_to_editarCitaFragment, bundle)
+        }
+    }
+
+    private fun deleteCita() {
+        citaViewModel.deleteCita(cita) { eliminada ->
+            if (eliminada) {
+                findNavController().navigate(R.id.action_detalleCitaFragment_to_homeFragment)
+            }
         }
     }
 }

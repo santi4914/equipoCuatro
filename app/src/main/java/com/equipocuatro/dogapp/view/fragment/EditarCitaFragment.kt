@@ -1,4 +1,3 @@
-
 package com.equipocuatro.dogapp.view.fragment
 
 import android.graphics.Typeface
@@ -19,235 +18,128 @@ import com.equipocuatro.dogapp.databinding.FragmentEditarCitaBinding
 import com.equipocuatro.dogapp.model.Cita
 import com.equipocuatro.dogapp.utils.Constants
 import com.equipocuatro.dogapp.viewmodel.CitaViewModel
-import java.util.Locale
 
 class EditarCitaFragment : Fragment() {
-
-    private var _binding: FragmentEditarCitaBinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding: FragmentEditarCitaBinding
     private val citaViewModel: CitaViewModel by viewModels()
-
     private lateinit var cita: Cita
-    private var guardando = false
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEditarCitaBinding.inflate(
-            inflater, container, false
-        )
+        binding = FragmentEditarCitaBinding.inflate(inflater)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        // Recibir la cita seleccionada desde HU4
-        @Suppress("DEPRECATION")
-        cita = requireArguments()
-            .getSerializable(Constants.CLAVE_CITA) as Cita
-
-        cargarDatos()
-        configurarVolver()
-        validarCampos()
-        configurarRazas()
-
-        binding.btnEditarCita.setOnClickListener {
-            guardarCambios()
-        }
+        controladores()
+        dataCita()
+        observadorViewModel()
     }
 
-    // Mostrar la información original de la cita
-    private fun cargarDatos() {
+    private fun dataCita() {
+        cita = arguments?.getSerializable(Constants.CLAVE_CITA) as Cita
         binding.etNombreMascota.setText(cita.nombreMascota)
-        binding.atRaza.setText(cita.raza, false)
+        binding.atRaza.setText(cita.raza)
         binding.etNombrePropietario.setText(cita.nombrePropietario)
         binding.etTelefono.setText(cita.telefono)
     }
 
-    // Regresar al detalle de la cita
-    private fun configurarVolver() {
+    private fun controladores() {
+        validarDatos()
         binding.toolbar.setNavigationOnClickListener {
-            if (!guardando) {
-                findNavController().popBackStack()
+            findNavController().popBackStack()
+        }
+        binding.btnEditarCita.setOnClickListener {
+            editarCita()
+        }
+    }
+
+    private fun editarCita() {
+        val raza = binding.atRaza.text.toString()
+        if (raza == cita.raza) {
+            updateCita(cita.urlImagen)
+        } else {
+            citaViewModel.getImagenRaza(raza.lowercase()) { urlImagen ->
+                if (urlImagen.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.errorImagenRaza), Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    updateCita(urlImagen)
+                }
             }
         }
     }
 
-    // Validar los cuatro campos obligatorios
-    private fun validarCampos() {
-        val campos = listOf<EditText>(
+    private fun updateCita(urlImagen: String) {
+        val citaEditada = Cita(
+            id = cita.id,
+            nombreMascota = binding.etNombreMascota.text.toString(),
+            raza = binding.atRaza.text.toString(),
+            nombrePropietario = binding.etNombrePropietario.text.toString(),
+            telefono = binding.etTelefono.text.toString(),
+            sintoma = cita.sintoma,
+            urlImagen = urlImagen
+        )
+        citaViewModel.updateCita(citaEditada) { actualizada ->
+            if (actualizada) {
+                Toast.makeText(context, getString(R.string.citaActualizada), Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigate(R.id.action_editarCitaFragment_to_homeFragment)
+            } else {
+                Toast.makeText(context, getString(R.string.errorActualizacion), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun validarDatos() {
+        val listEditText = listOf<EditText>(
             binding.etNombreMascota,
             binding.atRaza,
             binding.etNombrePropietario,
             binding.etTelefono
         )
 
-        val actualizarEstado = {
-            val completos = campos.all {
-                it.text.toString().isNotBlank()
-            }
-
-            binding.btnEditarCita.isEnabled =
-                completos && !guardando
-
-            binding.btnEditarCita.setTypeface(
-                null,
-                if (completos) Typeface.BOLD
-                else Typeface.NORMAL
-            )
-        }
-
-        campos.forEach { campo ->
-            campo.addTextChangedListener {
-                actualizarEstado()
+        for (editText in listEditText) {
+            editText.addTextChangedListener {
+                val isListFull = listEditText.all {
+                    it.text.isNotEmpty()
+                }
+                binding.btnEditarCita.isEnabled = isListFull
+                if (isListFull) {
+                    binding.btnEditarCita.setTypeface(null, Typeface.BOLD)
+                } else {
+                    binding.btnEditarCita.setTypeface(null, Typeface.NORMAL)
+                }
             }
         }
-
-        actualizarEstado()
     }
 
-    // Consultar las razas disponibles usando Retrofit
-    private fun configurarRazas() {
-        citaViewModel.listRazas.observe(viewLifecycleOwner) { razas ->
-            val adapter = ArrayAdapter(
-                requireContext(),
+    private fun observadorViewModel() {
+        observerListRazas()
+        observerProgress()
+    }
+
+    private fun observerProgress() {
+        citaViewModel.progressState.observe(viewLifecycleOwner) { status ->
+            binding.progress.isVisible = status
+            binding.svFormulario.isVisible = !status
+        }
+    }
+
+    private fun observerListRazas() {
+        citaViewModel.getRazas()
+        citaViewModel.listRazas.observe(viewLifecycleOwner) { listRazas ->
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                binding.root.context,
                 android.R.layout.simple_dropdown_item_1line,
-                razas
+                listRazas
             )
             binding.atRaza.setAdapter(adapter)
         }
-
-        citaViewModel.getRazas()
-    }
-
-    // Obtener los nuevos valores del formulario
-    private fun guardarCambios() {
-        if (guardando) return
-
-        val nombreMascota =
-            binding.etNombreMascota.text.toString().trim()
-
-        val raza =
-            binding.atRaza.text.toString().trim()
-
-        val nombrePropietario =
-            binding.etNombrePropietario.text.toString().trim()
-
-        val telefono =
-            binding.etTelefono.text.toString().trim()
-
-        if (listOf(
-                nombreMascota,
-                raza,
-                nombrePropietario,
-                telefono
-            ).any { it.isBlank() }
-        ) {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.msg_campos_obligatorios),
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
-        // copy conserva el ID y el síntoma original
-        val citaEditada = cita.copy(
-            nombreMascota = nombreMascota,
-            raza = raza,
-            nombrePropietario = nombrePropietario,
-            telefono = telefono
-        )
-
-        cambiarEstadoGuardado(true)
-
-        // Consultar una nueva imagen solamente si cambia la raza
-        if (raza.equals(cita.raza, ignoreCase = true)) {
-            actualizarCita(citaEditada)
-        } else {
-            citaViewModel.getImagenRaza(
-                raza.lowercase(Locale.ROOT)
-            ) { nuevaImagen ->
-
-                if (_binding == null) return@getImagenRaza
-
-                if (nuevaImagen.isBlank()) {
-                    cambiarEstadoGuardado(false)
-
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.msg_error_imagen_raza),
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                    return@getImagenRaza
-                }
-
-                actualizarCita(
-                    citaEditada.copy(urlImagen = nuevaImagen)
-                )
-            }
-        }
-    }
-
-    // Actualizar el registro existente en Room
-    private fun actualizarCita(citaActualizada: Cita) {
-        citaViewModel.updateCita(citaActualizada) { exito ->
-
-            if (_binding == null || !isAdded) {
-                return@updateCita
-            }
-
-            cambiarEstadoGuardado(false)
-
-            if (exito) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.msg_cita_actualizada),
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                findNavController().navigate(
-                    R.id.action_editarCitaFragment_to_homeFragment
-                )
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.msg_error_actualizacion),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
-
-    // Mostrar u ocultar la carga durante el guardado
-    private fun cambiarEstadoGuardado(enCurso: Boolean) {
-        guardando = enCurso
-
-        binding.progress.isVisible = enCurso
-        binding.svFormulario.isVisible = !enCurso
-
-        val completos = listOf(
-            binding.etNombreMascota.text.toString(),
-            binding.atRaza.text.toString(),
-            binding.etNombrePropietario.text.toString(),
-            binding.etTelefono.text.toString()
-        ).all { it.isNotBlank() }
-
-        binding.btnEditarCita.isEnabled = completos && !enCurso
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

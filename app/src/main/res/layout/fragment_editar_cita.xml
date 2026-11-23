@@ -9,11 +9,11 @@
         android:background="@color/white"
         tools:context=".view.fragment.EditarCitaFragment">
 
-        <!-- Barra superior -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="90dp"
+            android:minHeight="90dp"
             android:background="@drawable/header_toolbar"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationContentDescription="@string/volver"
@@ -34,7 +34,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- Formulario -->
         <ScrollView
             android:id="@+id/svFormulario"
             android:layout_width="0dp"
@@ -50,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:padding="24dp">
 
-                <!-- Nombre de la mascota -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilNombreMascota"
                     android:layout_width="0dp"
@@ -73,7 +71,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Raza con autocompletado -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilRaza"
                     android:layout_width="0dp"
@@ -98,7 +95,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Nombre del propietario -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilNombrePropietario"
                     android:layout_width="0dp"
@@ -121,7 +117,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Teléfono -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilTelefono"
                     android:layout_width="0dp"
@@ -144,7 +139,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Botón Editar Cita -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnEditarCita"
                     android:layout_width="wrap_content"
@@ -159,7 +153,7 @@
                     android:textColor="@color/texto_boton"
                     android:textStyle="bold"
                     app:cornerRadius="24dp"
-                    app:icon="@android:drawable/ic_menu_edit"
+                    app:icon="@drawable/ic_editar"
                     app:iconGravity="textStart"
                     app:iconPadding="8dp"
                     app:iconTint="@color/texto_boton"
@@ -172,7 +166,6 @@
 
         </ScrollView>
 
-        <!-- Indicador de carga -->
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
