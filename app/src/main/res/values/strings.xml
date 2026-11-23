@@ -31,6 +31,8 @@
         <item>Bota demasiado pelo</item>
     </string-array>
 
+    <string name="citaGuardada">Cita guardada correctamente</string>
+    <string name="errorGuardarCita">Error al guardar la cita: %1$s</string>
     <string name="errorImagenRaza">No se pudo obtener la imagen de la raza</string>
     <string name="citaActualizada">Cita actualizada correctamente</string>
     <string name="errorActualizacion">Error al actualizar la cita</string>

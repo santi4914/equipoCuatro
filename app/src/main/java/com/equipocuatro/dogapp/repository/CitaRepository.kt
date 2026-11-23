@@ -1,6 +1,7 @@
 package com.equipocuatro.dogapp.repository
 
 import android.content.Context
+import com.equipocuatro.dogapp.R
 import com.equipocuatro.dogapp.data.CitaDB
 import com.equipocuatro.dogapp.data.CitaDao
 import com.equipocuatro.dogapp.model.Cita
@@ -18,9 +19,9 @@ class CitaRepository(val context: Context) {
             withContext(Dispatchers.IO) {
                 citaDao.saveCita(cita)
             }
-            messageResponse("Cita guardada correctamente")
+            messageResponse(context.getString(R.string.citaGuardada))
         } catch (e: Exception) {
-            messageResponse("Error al guardar la cita: ${e.message}")
+            messageResponse(context.getString(R.string.errorGuardarCita, e.message))
         }
     }
 
