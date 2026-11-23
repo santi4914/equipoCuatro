@@ -86,15 +86,21 @@ class CitaViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun updateCita(cita: Cita) {
+
+    fun updateCita(cita: Cita, onComplete: (Boolean) -> Unit = {}) {
         viewModelScope.launch {
             _progressState.value = true
-            try {
+
+            val actualizado = try {
                 citaRepository.updateCita(cita)
-                _progressState.value = false
+                true
             } catch (e: Exception) {
+                false
+            } finally {
                 _progressState.value = false
             }
+
+            onComplete(actualizado)
         }
     }
 }

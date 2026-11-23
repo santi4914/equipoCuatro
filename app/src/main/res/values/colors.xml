@@ -8,4 +8,5 @@
     <color name="rosado_inactivo">#99F05861</color>
     <color name="blanco_inactivo">#B3FFFFFF</color>
     <color name="azul_oscuro">#183153</color>
+    <color name="morado_borde">#6750A4</color>
 </resources>
