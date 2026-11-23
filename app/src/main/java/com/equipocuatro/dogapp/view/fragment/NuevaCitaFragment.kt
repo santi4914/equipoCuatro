@@ -60,17 +60,22 @@ class NuevaCitaFragment : Fragment() {
         val sintoma = binding.spSintomas.selectedItem.toString()
 
         citaViewModel.getImagenRaza(raza.lowercase()) { urlImagen ->
-            val cita = Cita(
-                nombreMascota = nombreMascota,
-                raza = raza,
-                nombrePropietario = nombrePropietario,
-                telefono = telefono,
-                sintoma = sintoma,
-                urlImagen = urlImagen
-            )
-            citaViewModel.saveCita(cita) { message ->
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                findNavController().popBackStack()
+            if (urlImagen.isEmpty()) {
+                Toast.makeText(context, getString(R.string.errorImagenRaza), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                val cita = Cita(
+                    nombreMascota = nombreMascota,
+                    raza = raza,
+                    nombrePropietario = nombrePropietario,
+                    telefono = telefono,
+                    sintoma = sintoma,
+                    urlImagen = urlImagen
+                )
+                citaViewModel.saveCita(cita) { message ->
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
             }
         }
     }
