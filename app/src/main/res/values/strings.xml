@@ -33,9 +33,8 @@
         <item>Bota demasiado pelo</item>
     </string-array>
 
-    <string name="msg_campos_obligatorios">Completa todos los campos</string>
-    <string name="msg_error_imagen_raza">No se pudo obtener la imagen de la raza</string>
-    <string name="msg_cita_actualizada">Cita actualizada correctamente</string>
-    <string name="msg_error_actualizacion">Error al actualizar la cita</string>
+    <string name="errorImagenRaza">No se pudo obtener la imagen de la raza</string>
+    <string name="citaActualizada">Cita actualizada correctamente</string>
+    <string name="errorActualizacion">Error al actualizar la cita</string>
 
 </resources>
