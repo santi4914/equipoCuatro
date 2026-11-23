@@ -39,9 +39,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    // La libreria biometric construye la ventana emergente (y su boton Cancelar
-    // la cierra); aqui solo se le dan el titulo, el subtitulo y el boton.
-    // Una huella que no coincide la avisa el propio dispositivo dentro de la ventana.
     private fun configurarBiometria() {
         val executor = ContextCompat.getMainExecutor(requireContext())
         biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
@@ -50,8 +47,6 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
 
-            // Errores que cierran la ventana (por ejemplo, demasiados intentos o
-            // ninguna huella registrada): se muestra el mensaje del sistema.
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
                 if (errorCode != BiometricPrompt.ERROR_NEGATIVE_BUTTON &&

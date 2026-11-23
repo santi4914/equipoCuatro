@@ -12,7 +12,6 @@ abstract class CitaDB : RoomDatabase() {
     abstract fun citaDao(): CitaDao
 
     companion object {
-        // Una sola instancia de la base de datos para toda la app.
         @Volatile
         private var instancia: CitaDB? = null
 

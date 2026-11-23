@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-// El id autogenerado es el turno de la cita.
 @Entity
 data class Cita(
     @PrimaryKey(autoGenerate = true)

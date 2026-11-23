@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
         observerProgress()
     }
 
-    // La lista sale de la base de datos local (Room) por medio del ViewModel.
     private fun observerListCitas() {
         citaViewModel.getListCitas()
         citaViewModel.listCitas.observe(viewLifecycleOwner) { listCitas ->
